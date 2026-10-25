@@ -21,7 +21,7 @@ for pos,item in enumerate(data.get("entries") or []):
     if pos==0:continue
     nums=[int(x) for x in NUMBER.findall(title)]
     episode=nums[0] if len(nums)==1 else None
-    entries.append({"id":vid,"title":title or "제목 미확인","episode":episode,"sourceOrder":pos})
+    if episode is None or episode <= 0: continue\n    if re.search(r"인터뷰|성우|비공개|삭제된|private video|deleted video",title,re.I): continue\n    entries.append({"id":vid,"title":title,"episode":episode,"sourceOrder":pos})
 # Keep the first source occurrence for each single episode number.
 used=set()
 unique=[]
