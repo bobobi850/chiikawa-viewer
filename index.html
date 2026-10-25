@@ -100,15 +100,8 @@ window.onYouTubeIframeAPIReady=()=>{apiReady=true;initialize()};
  if(!(await catalog())){
   state.mode='fallback';
   status('전체 목록 생성 전입니다. 임시 재생목록을 불러옵니다.');
-  // Fallback uses the YouTube playlist API, which can be incomplete.
-  const probe=new YT.Player(document.createElement('div'),{playerVars:{listType:'playlist',list:LIST},events:{onReady:e=>e.target.cuePlaylist({listType:'playlist',list:LIST,index:1}),onStateChange:e=>{
-   const ids=e.target.getPlaylist()||[];
-   if(ids.length&&!listingReady){
-    state.episodes=prepare(ids.slice(1).map((v,i)=>({id:v,title:'영상 '+(i+1),sourceOrder:i})));
-    chooseStart();listingReady=true;initialize();
-   }
-  }}});
-  // The catalog workflow must run for complete episode ordering.
+  $('count').textContent='전체 회차 목록 준비 중';
+  $('episodes').textContent='GitHub Actions에서 Update episode catalog를 실행하면 전체 목록이 표시됩니다.';
  }else{listingReady=true;initialize()}
 })();
 const script=document.createElement('script');script.src='https://www.youtube.com/iframe_api';document.head.append(script);
