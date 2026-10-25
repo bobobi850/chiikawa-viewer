@@ -45,7 +45,7 @@ function draw(){
   const episode='EP '+String(i).padStart(2,'0');
   if(term&&!((episode+' '+name).toLocaleLowerCase().includes(term)))return;
   const b=document.createElement('button');b.className='episode'+(i===state.index?' active':'');
-  const label=document.createElement('span');label.textContent=(watched.has(id)?'✓ ':'')+episode+' · '+name;
+  const label=document.createElement('span');label.textContent=(watched.has(id)?'✓ ':'')+name;
   const star=document.createElement('b');star.textContent=favorites.has(id)?'★':'☆';
   b.append(label,star);b.onclick=()=>go(i);box.append(b);
  });
